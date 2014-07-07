@@ -10,6 +10,16 @@
 		
 		<Link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<Link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+
+		<style type="text/css">
+		 .ng-dirty .ng-invalid {
+				border-color: #FA787E !important;
+			}
+
+		 .ng-dirty .ng-valid {
+				border-color: #78FA89 !important;
+			}
+		</style>
 		
 		<script src="js/angular.min.js" type="text/javascript"></script>
 		<script src="js/app.js" type="text/javascript"></script>
@@ -39,9 +49,10 @@
 	<div class="col-md-12" >
 		<div class="row" ng-controller="StoreController as store">
 			<div class="col-md-4" ng-repeat="product in store.product">
-				<h1>{{product.name}}</h1>
-				 <em class="pull-right">{{product.price | currency }}</em>
-				
+
+				<product-title></product-title>
+
+				<button class="btn btn-default" ng-show="product.canPurchase">Add to Car</button>
 		        <div class="" class="gallery" ng-controller="GalleryController as gallery">
 		        	<a href="#" class="thumbnail">
 		          		<img class="img img-circle img-thumbnail center-block" alt="" width="240" ng-src="{{product.images[gallery.current]}}"/>
@@ -53,32 +64,7 @@
 		        		</li>
 		          	</ul>
 		        </div>
-
-		        	<section ng-controller="PanelController as panel">
-						<ul class="nav nav-pills">
-							<li ng-class="{active: panel.isSelected(1)}"><a href ng-click="panel.selectTab(1)">Description</a></li>
-							<li ng-class="{active: panel.isSelected(2)}"><a href ng-click="panel.selectTab(2)">Spesifications</a></li>
-							<li ng-class="{active: panel.isSelected(3)}"><a href ng-click="panel.selectTab(3)">Reviews</a></li>
-						</ul>
-
-						<div class="tab-content">
-							<div class="panel" ng-show="panel.isSelected(1)">
-								<h4>Description</h4>
-								<blockquote>{{product.description}}</blockquote>>
-							</div>
-							<div class="panel" ng-show="panel.isSelected(2)">
-								<h4>Spesifications</h4>
-								<p>Not Yet</p>
-							</div>
-							<div class="panel" ng-show="panel.isSelected(3)">
-								<h4>Reviews</h4>
-								<blockquote>not Yet</blockquote>
-							</div>
-						</div>
-
-					</section>
-
-		       	<button class="btn btn-default" ng-show="product.canPurchase">Add to Car</button>
+		        <product-panels></product-panels>
 			</div>
 		</div>
 	</div>
